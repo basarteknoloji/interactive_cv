@@ -15,22 +15,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Flutter Action cache (eski sürüm cache'ini temizleme)
-      - name: Cache Flutter SDK
-        uses: actions/cache@v3
-        with:
-          path: ~/.flutter
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-
       # 3️⃣ Flutter kur
       - name: Set up Flutter
         uses: subosito/flutter-action@v2.9.1
         with:
           flutter-version: "3.13.8"
+      
+      - name: Force upgrade Flutter
+        run: flutter upgrade
 
       # 4️⃣ Flutter sürümünü doğrula
       - name: Check Flutter version
-        run: flutter --version
+        run: flutter --version && dart --version
 
       # 5️⃣ Flutter bağımlılıklarını yükle
       - name: Install dependencies
