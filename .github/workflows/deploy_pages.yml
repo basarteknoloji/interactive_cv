@@ -4,29 +4,47 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Manuel tetikleme için de ekledik
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # 1️⃣ Repo'yu çek
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2️⃣ Flutter Action cache (eski sürüm cache'ini temizleme)
+      - name: Cache Flutter SDK
+        uses: actions/cache@v3
+        with:
+          path: ~/.flutter
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+
+      # 3️⃣ Flutter kur
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2.9.1
         with:
           flutter-version: "3.13.8"
 
+      # 4️⃣ Flutter sürümünü doğrula
+      - name: Check Flutter version
+        run: flutter --version
+
+      # 5️⃣ Flutter bağımlılıklarını yükle
       - name: Install dependencies
         run: flutter pub get
 
+      # 6️⃣ Flutter web build (GitHub Pages için base-href ayarı)
       - name: Build Flutter web
         run: flutter build web --release --base-href /interactive_cv/
 
+      # 7️⃣ 404 yönlendirmesi ekle (SPA için)
       - name: Add 404 redirect for SPA
         run: cp build/web/index.html build/web/404.html
 
+      # 8️⃣ GitHub Pages'e deploy et
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
