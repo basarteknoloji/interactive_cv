@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:interactive_cv/features/about/application/providers/about_providers.dart';
+import 'package:interactive_cv/features/about/application/di/about_providers.dart';
 import 'package:interactive_cv/features/about/domain/entities/about_entity.dart';
 import 'package:interactive_cv/features/about/domain/usecases/get_about.dart';
 

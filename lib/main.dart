@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:interactive_cv/core/config/app_init_provider.dart';
 import 'package:interactive_cv/features/about/presentation/pages/about_page.dart';
 
 void main() {
   runApp(
     const ProviderScope(
-      child: MyApp(),
+      child: AppInitializer(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AppInitializer extends ConsumerWidget {
+  const AppInitializer({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Interactive CV',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final initState = ref.watch(appInitProvider);
+
+    return initState.when(
+      data: (_) => const AboutPage(),
+      loading: () => const MaterialApp(
+        home: Scaffold(
+          body: Center(child: CircularProgressIndicator()),
+        ),
       ),
-      home: const AboutPage(),
+      error: (err, _) => MaterialApp(
+        home: Scaffold(
+          body: Center(child: Text('Init error: $err')),
+        ),
+      ),
     );
   }
 }

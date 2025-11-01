@@ -1,3 +1,4 @@
+// 1. Dio provider
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:interactive_cv/features/about/data/datasources/remote/about_remote_data_source.dart';
@@ -5,8 +6,10 @@ import 'package:interactive_cv/features/about/data/repositories/about_repository
 import 'package:interactive_cv/features/about/domain/repositories/about_repository.dart';
 import 'package:interactive_cv/features/about/domain/usecases/get_about.dart';
 
-// 1. Dio provider
-final dioProvider = Provider<Dio>((ref) => Dio());
+final dioProvider = Provider<Dio>((ref) {
+  final dio = Dio(BaseOptions(baseUrl: 'https://api.example.com'));
+  return dio;
+});
 
 // 2. Remote Data Source provider
 final userRemoteDataSourceProvider = Provider<AboutRemoteDataSource>((ref) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:interactive_cv/features/about/presentation/controllers/about_controller.dart';
+import 'package:interactive_cv/features/about/application/state/about_state.dart';
 
 class AboutPage extends ConsumerWidget {
   const AboutPage({super.key});
