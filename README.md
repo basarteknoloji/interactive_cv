@@ -15,5 +15,6 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-
-[![Open in Dev Containers](https://img.shields.io/badge/Run%20in-GitHub%20Codespaces-blue?logo=github)](https://github.com/codespaces/new?repo=basarteknoloji/interactive_cv)
+🚀 **Canlı Site:** [GitHub Pages](https://basarteknoloji.github.io/interactive_cv/)  
+🐳 **Docker Image:** `ghcr.io/basarteknoloji/interactive_cv:latest`  
+💻 **Dev Container:**  [![Open in Dev Containers](https://img.shields.io/badge/Run%20in-GitHub%20Codespaces-blue?logo=github)](https://github.com/codespaces/new?repo=basarteknoloji/interactive_cv)
