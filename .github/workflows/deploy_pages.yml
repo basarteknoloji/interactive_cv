@@ -1,4 +1,4 @@
-name: Build and Deploy Flutter Web to GitHub Pages.
+name: Build and Deploy Flutter Web to GitHub Pages
 
 on:
   push:
@@ -10,19 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.19.4"
+          flutter-version: "3.13.8"
 
       - name: Install dependencies
         run: flutter pub get
 
       - name: Build Flutter web
-        run: flutter build web --release
+        run: flutter build web --release --base-href /interactive_cv/
 
       - name: Add 404 redirect for SPA
         run: cp build/web/index.html build/web/404.html
